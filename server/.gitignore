@@ -1,0 +1,4 @@
+.env
+/.vs
+/bin
+/obj
