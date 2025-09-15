@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <AndroidManifestPlaceholders>GOOGLE_MAPS_API_KEY=SECRET_KEY</AndroidManifestPlaceholders>
+  </PropertyGroup>
+</Project>

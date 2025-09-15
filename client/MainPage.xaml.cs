@@ -1,25 +1,22 @@
-﻿namespace rodnie
-{
-    public partial class MainPage : ContentPage
-    {
-        int count = 0;
+﻿using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+namespace rodnie;
+    
+public partial class MainPage : ContentPage {
+    public MainPage() {
+        InitializeComponent();
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
+        var moscowPos = new Location(55.7558, 37.6173);
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(moscowPos, Distance.FromKilometers(10)));
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        var userPin = new Pin {
+            Label = "Пользователь",
+            Location = moscowPos,
+            Type = PinType.Place
+        };
+        map.Pins.Add(userPin);
     }
-
 }
+
