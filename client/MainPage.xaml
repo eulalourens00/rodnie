@@ -12,9 +12,7 @@
             <Grid>
                 <maps:Map x:Name="map"/>
                 <VerticalStackLayout Margin="0,0,20,0">
-                    <Label Text="Coords:" HorizontalOptions="End"/>
-                    <Label Text="Lat: 55.7558" HorizontalOptions="End" />
-                    <Label Text="Lon: 37.6173" HorizontalOptions="End"/>
+                   
                 </VerticalStackLayout>
             </Grid>
         </Border>

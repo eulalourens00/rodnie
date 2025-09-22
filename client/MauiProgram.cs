@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using rodnie.Platforms.Android.Handlers;
 
 namespace rodnie
 {
@@ -15,9 +16,13 @@ namespace rodnie
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddHandler<Microsoft.Maui.Controls.Maps.Map, CustomMapHandler>();
+            });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
