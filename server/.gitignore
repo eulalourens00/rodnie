@@ -1,0 +1,6 @@
+.env
+/.vs
+/bin
+/obj
+*.tmp
+*.user
