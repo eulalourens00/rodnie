@@ -12,7 +12,7 @@ using Rodnie.API.Data;
 namespace Rodnie.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250927124746_MigrateAll")]
+    [Migration("20250927211553_MigrateAll")]
     partial class MigrateAll
     {
         /// <inheritdoc />
@@ -31,9 +31,6 @@ namespace Rodnie.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("is_admin")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("is_restricted")
                         .HasColumnType("bit");
 
@@ -48,7 +45,10 @@ namespace Rodnie.API.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<int>("role")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("updated_at")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("username")

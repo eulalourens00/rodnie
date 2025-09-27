@@ -21,9 +21,9 @@ namespace Rodnie.API.Migrations
                     phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     is_verified = table.Column<bool>(type: "bit", nullable: false),
                     is_restricted = table.Column<bool>(type: "bit", nullable: false),
-                    is_admin = table.Column<bool>(type: "bit", nullable: false),
+                    role = table.Column<int>(type: "int", nullable: false),
                     сreated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

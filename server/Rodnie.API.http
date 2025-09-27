@@ -5,7 +5,7 @@ Accept: application/json
 Content-Type: application/json
 {
   "phone": "1",
-  "username": "test",
+  "username": "test5",
   "password": "test"
 }
 ###
