@@ -10,6 +10,7 @@ using Rodnie.API.Profiles;
 using Rodnie.API.Services;
 using Rodnie.API.Services.JWT;
 using Rodnie.API.Enums;
+using Rodnie.API.Middlewares;
 
 namespace Rodnie.API {
     public class Program {
@@ -39,8 +40,11 @@ namespace Rodnie.API {
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();

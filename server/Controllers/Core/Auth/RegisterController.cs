@@ -17,12 +17,8 @@ namespace Rodnie.API.Controllers.Core.Auth {
         public async Task<ActionResult<UserResponse>> Register(CreateUserRequest request) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try {
-                var userResponse = await _service.CreateAsync(request);
-                return Ok(userResponse);
-            } catch (Exception ex) {
-                return Conflict(new { Error = ex.Message });
-            }
+            var userResponse = await _service.CreateAsync(request);
+            return Ok(userResponse);
         }
     }
 }

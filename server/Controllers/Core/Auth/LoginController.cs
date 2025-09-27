@@ -8,26 +8,18 @@ namespace Rodnie.API.Controllers.Core.Auth {
     [ApiController]
     [Route("api/v1/core/auth/[controller]")]
     public class LoginController : Controller {
-        private readonly IUserService _service;
+        private readonly IUserService service;
 
         public LoginController(IUserService service) {
-            _service = service;
+            this.service = service;
         }
 
         [HttpPost]
         public async Task<ActionResult<UserResponse>> Login(UsernameLoginRequest request) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try {
-                var userResponse = await _service.UsernameLoginAsync(request);
-                return Ok(userResponse);
-            } catch (RodnieNotFoundException ex) {
-                return NotFound(new { Error = ex.Message });
-            } catch (UnauthorizedAccessException ex) {
-                return Unauthorized(new { Error = ex.Message });
-            } catch {
-                return StatusCode(500, new { Error = "Internal server error" });
-            }
+            var userResponse = await service.UsernameLoginAsync(request);
+            return Ok(userResponse);
         }
     }
 }
