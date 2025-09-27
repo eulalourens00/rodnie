@@ -26,7 +26,10 @@ namespace Rodnie.API.Models {
         [Column(TypeName = "int")]
         public int role { get; set; } = (int)RolesEnum.User;
 
+        [Column(TypeName = "datetime")]
         public DateTime сreated_at { get; set; } = DateTime.UtcNow;
+
+        [Column(TypeName = "datetime")]
         public DateTime updated_at { get; set; } = DateTime.UtcNow;
     }
 }

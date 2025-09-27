@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Rodnie.API.Controllers.Core.Auth {
@@ -7,8 +8,9 @@ namespace Rodnie.API.Controllers.Core.Auth {
     [Authorize]
     public class TestController : Controller {
         [HttpGet]
-        public async Task<ActionResult> Index() {
-            return Ok();
+        public async Task<ActionResult<object>> Test() {
+            var roleClaim = User.FindFirst(ClaimTypes.Role).Value;
+            return Ok(roleClaim);
         }
     }
 }
