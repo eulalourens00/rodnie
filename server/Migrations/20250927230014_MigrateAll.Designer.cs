@@ -12,7 +12,7 @@ using Rodnie.API.Data;
 namespace Rodnie.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250927211553_MigrateAll")]
+    [Migration("20250927230014_MigrateAll")]
     partial class MigrateAll
     {
         /// <inheritdoc />
@@ -42,22 +42,21 @@ namespace Rodnie.API.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<int>("role")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("updated_at")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("username")
                         .IsRequired()
-                        .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
 
                     b.Property<DateTime>("сreated_at")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.HasKey("id");
 
