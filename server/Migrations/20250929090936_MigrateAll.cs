@@ -29,11 +29,37 @@ namespace Rodnie.API.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Pins",
+                columns: table => new
+                {
+                    pin_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    owner_user_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pins", x => x.pin_id);
+                    table.ForeignKey(
+                        name: "FK_Pins_Users_owner_user_id",
+                        column: x => x.owner_user_id,
+                        principalTable: "Users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pins_owner_user_id",
+                table: "Pins",
+                column: "owner_user_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Pins");
+
             migrationBuilder.DropTable(
                 name: "Users");
         }

@@ -5,7 +5,7 @@ using Rodnie.API.Enums;
 namespace Rodnie.API.Models {
     public class User {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "uniqueidentifier")]
         public Guid id { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "nvarchar(16)")]

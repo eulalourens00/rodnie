@@ -12,7 +12,7 @@ using Rodnie.API.Data;
 namespace Rodnie.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250927230014_MigrateAll")]
+    [Migration("20250929090936_MigrateAll")]
     partial class MigrateAll
     {
         /// <inheritdoc />
@@ -24,6 +24,22 @@ namespace Rodnie.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Rodnie.API.Models.Pin", b =>
+                {
+                    b.Property<Guid>("pin_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("owner_user_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("pin_id");
+
+                    b.HasIndex("owner_user_id");
+
+                    b.ToTable("Pins");
+                });
 
             modelBuilder.Entity("Rodnie.API.Models.User", b =>
                 {
@@ -61,6 +77,15 @@ namespace Rodnie.API.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Rodnie.API.Models.Pin", b =>
+                {
+                    b.HasOne("Rodnie.API.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("owner_user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
