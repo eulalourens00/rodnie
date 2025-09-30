@@ -6,6 +6,19 @@ namespace Rodnie.API.Data {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {
         }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pin> Pins { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Pin>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(p => p.owner_user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
+        }
     }
 }

@@ -1,11 +1,20 @@
 @Rodnie.API_HostAddress = http://localhost:5118
 
-GET {{Rodnie.API_HostAddress}}/weatherforecast/
+POST {{Rodnie.API_HostAddress}}/api/v1/core/auth/register
 Accept: application/json
-
+Content-Type: application/json
+{
+  "phone": "1",
+  "username": "test5",
+  "password": "test"
+}
 ###
 
-GET {{Rodnie.API_HostAddress}}/core/auth/register
+POST {{Rodnie.API_HostAddress}}/api/v1/core/auth/login
 Accept: application/json
-
+Content-Type: application/json
+{
+  "username": "test",
+  "password": "test"
+}
 ###
