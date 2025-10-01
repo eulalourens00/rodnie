@@ -19,6 +19,30 @@ namespace Rodnie.API.Data {
                 .HasForeignKey(p => p.owner_user_id)
                 .OnDelete(DeleteBehavior.Cascade)
             ;
+
+            modelBuilder.Entity<Group>()
+                .ToTable("Groups")
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(g => g.owner_user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
+
+            modelBuilder.Entity<Relation>()
+                .ToTable("Relations")
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(r => r.relation_user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
+
+            modelBuilder.Entity<Relation>()
+                .ToTable("Relations")
+                .HasOne<Group>()
+                .WithMany()
+                .HasForeignKey(r => r.relation_group_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
         }
     }
 }

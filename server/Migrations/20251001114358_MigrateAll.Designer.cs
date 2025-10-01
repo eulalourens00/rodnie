@@ -12,7 +12,7 @@ using Rodnie.API.Data;
 namespace Rodnie.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250929090936_MigrateAll")]
+    [Migration("20251001114358_MigrateAll")]
     partial class MigrateAll
     {
         /// <inheritdoc />
@@ -24,6 +24,32 @@ namespace Rodnie.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Rodnie.API.Models.Group", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<Guid>("owner_user_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("сreated_at")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("owner_user_id");
+
+                    b.ToTable("Groups", (string)null);
+                });
 
             modelBuilder.Entity("Rodnie.API.Models.Pin", b =>
                 {
@@ -39,6 +65,33 @@ namespace Rodnie.API.Migrations
                     b.HasIndex("owner_user_id");
 
                     b.ToTable("Pins");
+                });
+
+            modelBuilder.Entity("Rodnie.API.Models.Relation", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("relation_group_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("relation_user_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("сreated_at")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("relation_group_id");
+
+                    b.HasIndex("relation_user_id");
+
+                    b.ToTable("Relations", (string)null);
                 });
 
             modelBuilder.Entity("Rodnie.API.Models.User", b =>
@@ -79,11 +132,35 @@ namespace Rodnie.API.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Rodnie.API.Models.Group", b =>
+                {
+                    b.HasOne("Rodnie.API.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("owner_user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Rodnie.API.Models.Pin", b =>
                 {
                     b.HasOne("Rodnie.API.Models.User", null)
                         .WithMany()
                         .HasForeignKey("owner_user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Rodnie.API.Models.Relation", b =>
+                {
+                    b.HasOne("Rodnie.API.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("relation_group_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rodnie.API.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("relation_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
