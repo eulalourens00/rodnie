@@ -158,7 +158,7 @@ namespace Rodnie.API.Migrations
                     b.HasOne("Rodnie.API.Models.User", null)
                         .WithMany()
                         .HasForeignKey("relation_user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

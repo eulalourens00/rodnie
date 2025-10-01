@@ -33,7 +33,7 @@ namespace Rodnie.API.Data {
                 .HasOne<User>()
                 .WithMany()
                 .HasForeignKey(r => r.relation_user_id)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.ClientCascade)
             ;
 
             modelBuilder.Entity<Relation>()
