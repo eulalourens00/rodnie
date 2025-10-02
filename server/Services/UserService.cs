@@ -39,7 +39,7 @@ namespace Rodnie.API.Services {
         public async Task<UserResponse> UsernameLoginAsync(UsernameLoginRequest request) {
             var user = await repository.GetByUsernameAsync(request.Username); // опционально, для безопастности можно удалить
             if (user == null) {
-                throw new RodnieNotFoundException("User not found");
+                throw new NotFoundException("User not found");
             }
 
             if (!Crypto.Verify(request.Password, user.password)) {

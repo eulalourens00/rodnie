@@ -4,19 +4,24 @@ using Rodnie.API.Models;
 
 namespace Rodnie.API.Repositories {
     public class UserRepository : IUserRepository {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public UserRepository(ApplicationDbContext context) {
-            _context = context;
+            this.context = context;
+        }
+
+        public async Task<User?> GetByIdAsync(string id) {
+            Guid userId = Guid.Parse(id);
+            return await context.Users.FirstOrDefaultAsync(u => u.id == userId);
         }
 
         public async Task<User?> GetByUsernameAsync(string username) {
-            return await _context.Users.FirstOrDefaultAsync(u => u.username.ToLower() == username.ToLower());
+            return await context.Users.FirstOrDefaultAsync(u => u.username.ToLower() == username.ToLower());
         }
 
         public async Task<User> CreateAsync(User user) {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
             return user;
         }
     }

@@ -1,16 +1,3 @@
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using DotNetEnv;
-
-using Rodnie.API.Data;
-using Rodnie.API.Repositories;
-using Rodnie.API.Profiles;
-using Rodnie.API.Services;
-using Rodnie.API.Services.JWT;
-using Rodnie.API.Enums;
-using Rodnie.API.Middlewares;
 using Rodnie.API.Config;
 
 namespace Rodnie.API {

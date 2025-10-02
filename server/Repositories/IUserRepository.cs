@@ -3,6 +3,7 @@
 namespace Rodnie.API.Repositories {
     public interface IUserRepository {
         // Check methods
+        Task<User?> GetByIdAsync(string id);
         Task<User?> GetByUsernameAsync(string username);
 
         // Data methods

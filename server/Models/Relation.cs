@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Rodnie.API.Enums;
 
 namespace Rodnie.API.Models {
     public class Relation {
@@ -14,6 +15,10 @@ namespace Rodnie.API.Models {
 
         [Column(TypeName = "uniqueidentifier")]
         public Guid relation_group_id { get; set; }
+
+
+        [Column(TypeName = "int")]
+        public int status { get; set; } = (int)InviteStatusesEnum.Send;
 
 
         [Column(TypeName = "datetime")]

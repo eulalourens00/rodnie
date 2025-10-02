@@ -5,7 +5,7 @@ using Rodnie.API.Services;
 
 namespace Rodnie.API.Controllers.Core.Auth {
     [ApiController]
-    [Route("api/v1/core/auth/[controller]")]
+    [Route("api/v1/auth/[controller]")]
     public class RegisterController : Controller {
         private readonly IUserService _service;
 
