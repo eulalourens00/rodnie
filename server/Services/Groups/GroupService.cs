@@ -19,12 +19,17 @@ namespace Rodnie.API.Services.Groups {
             var group = mapper.Map<Group>(request);
             group.owner_user_id = Guid.Parse(creatorId);
 
-            var userGroups = await repository.GetUserGroupsAsync(creatorId);
+            var userGroups = await repository.GetGroupsAsync(creatorId);
             if (userGroups.Count >= 3) {
                 throw new LimitExceededException("Достигнут лимит групп");
             }
             group = await repository.CreateAsync(group);
             return mapper.Map<GroupResponse>(group);
+        }
+
+        public async Task<List<GroupResponse>> GetGroupsAsync(string userId) {
+            var groups = await repository.GetGroupsAsync(userId);
+            return mapper.Map<List<GroupResponse>>(groups);
         }
     }
 }

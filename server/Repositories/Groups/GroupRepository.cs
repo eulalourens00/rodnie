@@ -10,6 +10,23 @@ namespace Rodnie.API.Repositories.Groups {
             this.context = context;
         }
 
+        public async Task<List<Group>> GetGroupsAsync(string id) {
+            Guid userId = Guid.Parse(id);
+
+            var userGroups = await GetUserGroupsAsync(id);
+
+            var joinedRelations = await context.Relations
+                .Where(r => r.relation_user_id == userId)
+                .Select(r => r.relation_group_id)
+                .ToListAsync();
+
+            var joinedGroups = await context.Groups
+                .Where(g => joinedRelations.Contains(g.id))
+                .ToListAsync();
+
+            return userGroups.Concat(joinedGroups).ToList();
+        }
+
         public async Task<List<Group>> GetUserGroupsAsync(string id) {
             Guid userId = Guid.Parse(id);
             return await context.Groups.Where(g => g.owner_user_id == userId).ToListAsync();
@@ -22,6 +39,7 @@ namespace Rodnie.API.Repositories.Groups {
         }
 
         public async Task<Group> UpdateAsync(Group group) {
+            group.updated_at = DateTime.UtcNow;
             context.Groups.Update(group);
             await context.SaveChangesAsync();
             return group;

@@ -7,12 +7,12 @@ using Rodnie.API.Services.Groups;
 
 namespace Rodnie.API.Controllers.Groups {
     [ApiController]
-    [Route("api/v1/groups/[controller]")]
+    [Route("api/v1/[controller]")]
     [Authorize]
-    public class CreateController : Controller {
+    public class GroupsController : Controller {
         private readonly IGroupService service;
 
-        public CreateController(IGroupService service) {
+        public GroupsController(IGroupService service) {
             this.service = service;
         }
 
@@ -22,6 +22,13 @@ namespace Rodnie.API.Controllers.Groups {
 
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var response = await service.CreateAsync(request, userId);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<GroupResponse>>> GetGroups() {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            var response = await service.GetGroupsAsync(userId);
             return Ok(response);
         }
     }
