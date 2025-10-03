@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\server",
+    "\\server\\Controllers",
+    "\\server\\Data",
+    "\\server\\DTO",
+    "\\server\\DTO\\Requests"
+  ],
+  "SelectedNode": "\\server\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}

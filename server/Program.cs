@@ -39,6 +39,12 @@ namespace Rodnie.API {
             // ƒобавление middlewares
             app.AppConfigureMiddlewares();
 
+            // регистраци€ репозиториев
+            builder.Services.AddScoped<IPinRepository, PinRepository>();
+            builder.Services.AddScoped<IPinService, PinService>(); //от нейронки, он почему-то не видит в подсказках нужное, либо € не вижу
+
+            // регистраци€ сервисов
+
             // «апуск приложени€
             app.AppRun();
         }
