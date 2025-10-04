@@ -8,6 +8,8 @@ namespace Rodnie.API.Data {
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Pin> Pins { get; set; }
+        public DbSet<Relation> Relations { get; set; }
+        public DbSet<Group> Groups { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -17,6 +19,30 @@ namespace Rodnie.API.Data {
                 .HasOne<User>()
                 .WithMany()
                 .HasForeignKey(p => p.owner_user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
+
+            modelBuilder.Entity<Group>()
+                .ToTable("Groups")
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(g => g.owner_user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+            ;
+
+            modelBuilder.Entity<Relation>()
+                .ToTable("Relations")
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(r => r.relation_user_id)
+                .OnDelete(DeleteBehavior.ClientCascade)
+            ;
+
+            modelBuilder.Entity<Relation>()
+                .ToTable("Relations")
+                .HasOne<Group>()
+                .WithMany()
+                .HasForeignKey(r => r.relation_group_id)
                 .OnDelete(DeleteBehavior.Cascade)
             ;
         }
