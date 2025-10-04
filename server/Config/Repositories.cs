@@ -1,5 +1,6 @@
 ﻿using Rodnie.API.Repositories;
 using Rodnie.API.Repositories.Groups;
+using Rodnie.API.Repositories.Groups.GroupRepository;
 
 namespace Rodnie.API.Config {
     public static partial class Config {

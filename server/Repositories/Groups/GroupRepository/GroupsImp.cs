@@ -2,8 +2,8 @@
 using Rodnie.API.Data;
 using Rodnie.API.Models;
 
-namespace Rodnie.API.Repositories.Groups {
-    public class GroupRepository : IGroupRepository {
+namespace Rodnie.API.Repositories.Groups.GroupRepository {
+    public partial class GroupRepository : IGroupRepository {
         public readonly ApplicationDbContext context;
 
         public GroupRepository(ApplicationDbContext context) {
@@ -16,8 +16,8 @@ namespace Rodnie.API.Repositories.Groups {
             var userGroups = await GetUserGroupsAsync(id);
 
             var joinedRelations = await context.Relations
-                .Where(r => r.relation_user_id == userId)
-                .Select(r => r.relation_group_id)
+                .Where(r => r.user_id == userId)
+                .Select(r => r.group_id)
                 .ToListAsync();
 
             var joinedGroups = await context.Groups

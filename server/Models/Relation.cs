@@ -10,11 +10,11 @@ namespace Rodnie.API.Models {
 
 
         [Column(TypeName = "uniqueidentifier")]
-        public Guid relation_user_id { get; set; }
+        public Guid user_id { get; set; }
 
 
         [Column(TypeName = "uniqueidentifier")]
-        public Guid relation_group_id { get; set; }
+        public Guid group_id { get; set; }
 
 
         [Column(TypeName = "int")]

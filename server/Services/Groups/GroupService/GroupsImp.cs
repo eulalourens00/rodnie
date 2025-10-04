@@ -5,8 +5,8 @@ using Rodnie.API.DTO.Responses.Groups;
 using Rodnie.API.Models;
 using Rodnie.API.Exceptions;
 
-namespace Rodnie.API.Services.Groups {
-    public class GroupService : IGroupService {
+namespace Rodnie.API.Services.Groups.GroupService {
+    public partial class GroupService : IGroupService {
         private readonly IGroupRepository repository;
         private readonly IMapper mapper;
 

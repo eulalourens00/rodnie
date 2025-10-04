@@ -3,9 +3,25 @@ using Rodnie.API.DTO.Responses.Groups;
 
 namespace Rodnie.API.Services.Groups {
     public interface IGroupService {
+        /* 
+         * Groups
+        */
+
+        // ~
+        Task<List<GroupResponse>> GetGroupsAsync(string userId);
+
+        // CRUD
         Task<GroupResponse> CreateAsync(CreateGroupRequest request, string creatorId);
         //Task<GroupResponse> UpdateAsync(UpdateGroupRequest request);
 
-        Task<List<GroupResponse>> GetGroupsAsync(string userId);
+        /*
+         * Relations
+        */
+
+        // ~ 
+        Task<List<RelationResponse>> GetRelationsAsync(string userId);
+
+        // CRUD 
+        Task<RelationResponse> CreateRelationAsync(CreateRelationRequest request, string creatorId);
     }
 }
